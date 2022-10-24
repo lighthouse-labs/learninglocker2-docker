@@ -2,17 +2,14 @@ version: "2"
 services:
   mongo:
     image: mongo:3.4
-    restart: unless-stopped
     volumes:
       - "${DATA_LOCATION}/mongo:/data/db"
 
   redis:
     image: redis:4-alpine
-    restart: unless-stopped
 
   xapi:
     image: learninglocker/xapi-service:2.1.10
-    restart: unless-stopped
     environment:
       - MONGO_URL=mongodb://mongo:27017/learninglocker_v2
       - MONGO_DB=learninglocker_v2
@@ -34,7 +31,6 @@ services:
       - SMTP_USER
       - SMTP_PASS
     command: "node api/dist/server"
-    restart: unless-stopped
     depends_on:
       - mongo
       - redis
@@ -52,7 +48,6 @@ services:
       - SMTP_USER
       - SMTP_PASS
     command: "./entrypoint-ui.sh"
-    restart: unless-stopped
     depends_on:
       - mongo
       - redis
@@ -72,7 +67,6 @@ services:
       - SMTP_USER
       - SMTP_PASS
     command: "node worker/dist/server"
-    restart: unless-stopped
     depends_on:
       - mongo
       - redis
@@ -83,7 +77,6 @@ services:
     image: michzimny/learninglocker2-nginx:${DOCKER_TAG}
     environment:
       - DOMAIN_NAME
-    restart: unless-stopped
     depends_on:
       - ui
       - xapi
