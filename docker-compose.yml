@@ -88,7 +88,8 @@ services:
       - ui
       - xapi
     ports:
-      - "5000:443"
+      - "443:443"
+      - "80:80"
     networks:
       default:
       lhl-dev:
