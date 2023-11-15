@@ -1,4 +1,4 @@
-FROM debian:9
+FROM docker.io/node:18-bookworm-slim
 
 RUN apt-get update \
     && apt-get install -y \
@@ -13,8 +13,6 @@ RUN apt-get update \
         unzip \
         gettext-base \
         socat \
-    && wget -qO- https://deb.nodesource.com/setup_8.x | bash \
-    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g yarn 
